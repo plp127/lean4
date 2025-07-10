@@ -57,7 +57,7 @@ instance decidableNoneEq (o : Option α) : Decidable (none = o) :=
 
 @[deprecated decidableEqNone (since := "2025-04-10"), inline]
 def decidable_eq_none {o : Option α} : Decidable (o = none) :=
-  decidableEqNone
+  decidableEqNone o
 
 instance decidableForallMem {p : α → Prop} [DecidablePred p] :
     ∀ o : Option α, Decidable (∀ a, a ∈ o → p a)
