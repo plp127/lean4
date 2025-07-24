@@ -120,13 +120,15 @@ builtin_initialize functionSummariesExt : SimplePersistentEnvExtension (FunId ×
   registerSimplePersistentEnvExtension {
     addImportedFn := fun _ => {}
     addEntryFn := fun s ⟨e, n⟩ => s.insert e n
-    toArrayFn := fun s => sortEntries s.toArray
+    exportEntriesFnEx? := some fun env s _ _ =>
+      let entries := sortEntries s.toArray
+      entries.filter (Compiler.LCNF.isDeclPublic env ·.1)
     asyncMode := .sync  -- compilation is non-parallel anyway
     replay? := some <| SimplePersistentEnvExtension.replayOfFilter (!·.contains ·.1) (fun s ⟨e, n⟩ => s.insert e n)
   }
 
 def addFunctionSummary (env : Environment) (fid : FunId) (v : Value) : Environment :=
-  functionSummariesExt.addEntry (env.addExtraName fid) (fid, v)
+  functionSummariesExt.addEntry env (fid, v)
 
 def getFunctionSummary? (env : Environment) (fid : FunId) : Option Value :=
   match env.getModuleIdxFor? fid with
@@ -158,8 +160,8 @@ def findVarValue (x : VarId) : M Value := do
 
 def findArgValue (arg : Arg) : M Value :=
   match arg with
-  | Arg.var x => findVarValue x
-  | _         => pure top
+  | .var x => findVarValue x
+  | .erased => pure top
 
 def updateVarAssignment (x : VarId) (v : Value) : M Unit := do
   let v' ← findVarValue x

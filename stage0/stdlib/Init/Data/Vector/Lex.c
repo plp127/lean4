@@ -42,7 +42,7 @@ _start:
 {
 if (lean_obj_tag(x_1) == 0)
 {
-lean_dec(x_3);
+lean_dec_ref(x_3);
 lean_inc(x_2);
 return x_2;
 }
@@ -51,7 +51,7 @@ else
 lean_object* x_4; lean_object* x_5; 
 x_4 = lean_ctor_get(x_1, 0);
 lean_inc(x_4);
-lean_dec(x_1);
+lean_dec_ref(x_1);
 x_5 = lean_apply_1(x_3, x_4);
 return x_5;
 }
@@ -88,7 +88,7 @@ _start:
 {
 if (lean_obj_tag(x_1) == 0)
 {
-lean_dec(x_3);
+lean_dec_ref(x_3);
 lean_inc(x_2);
 return x_2;
 }
@@ -97,7 +97,7 @@ else
 lean_object* x_4; lean_object* x_5; 
 x_4 = lean_ctor_get(x_1, 0);
 lean_inc(x_4);
-lean_dec(x_1);
+lean_dec_ref(x_1);
 x_5 = lean_apply_1(x_3, x_4);
 return x_5;
 }
@@ -140,7 +140,6 @@ _start:
 {
 lean_object* x_5; 
 x_5 = l_Vector_instTransLt(x_1, x_2, x_3, x_4);
-lean_dec(x_3);
 lean_dec(x_2);
 return x_5;
 }
@@ -156,7 +155,6 @@ _start:
 {
 lean_object* x_8; 
 x_8 = l_Vector_instTransLeOfIrreflOfAsymmOfAntisymmOfNotLt(x_1, x_2, x_3, x_4, x_5, x_6, x_7);
-lean_dec(x_3);
 lean_dec(x_2);
 return x_8;
 }
@@ -167,7 +165,6 @@ _start:
 lean_object* x_4; uint8_t x_5; 
 x_4 = lean_apply_2(x_1, x_2, x_3);
 x_5 = lean_unbox(x_4);
-lean_dec(x_4);
 return x_5;
 }
 }
@@ -213,7 +210,6 @@ _start:
 {
 uint8_t x_8; lean_object* x_9; 
 x_8 = l_Vector_instDecidableLTOfDecidableEq(x_1, x_2, x_3, x_4, x_5, x_6, x_7);
-lean_dec(x_4);
 x_9 = lean_box(x_8);
 return x_9;
 }
@@ -262,7 +258,6 @@ _start:
 {
 uint8_t x_8; lean_object* x_9; 
 x_8 = l_Vector_instDecidableLEOfDecidableEqOfDecidableLT(x_1, x_2, x_3, x_4, x_5, x_6, x_7);
-lean_dec(x_4);
 x_9 = lean_box(x_8);
 return x_9;
 }
